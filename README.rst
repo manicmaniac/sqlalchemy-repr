@@ -1,6 +1,9 @@
 sqlalchemy-repr
 ===============
 
+.. image:: https://travis-ci.org/manicmaniac/sqlalchemy-repr.svg?branch=master
+    :target: https://travis-ci.org/manicmaniac/sqlalchemy-repr
+
 Automatically generates pretty ``repr`` of a SQLAlchemy model.
 
 Install

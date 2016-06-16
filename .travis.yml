@@ -1,0 +1,15 @@
+language: python
+python:
+    - 2.7
+env:
+    matrix:
+        - TOXENV=py26
+        - TOXENV=py27
+        - TOXENV=py33
+        - TOXENV=py34
+        - TOXENV=flake8
+        - TOXENV=isort
+install:
+    - pip install tox
+script:
+    - tox
