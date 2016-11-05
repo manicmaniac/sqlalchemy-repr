@@ -58,7 +58,7 @@ Example
     >>> session.commit()
 
     >>> print(user)
-    <User id=1, name='spam', created=datetime.datetime(2016, 6, 1, 0, 0)>
+    <User id=1, name='spam', created='2016-06-01T00:00:00'>
 
 ``sqlalchemy_repr.PrettyRepresentableBase`` brings pretty, indented multi-line representation.
 
@@ -92,5 +92,5 @@ Example
         first_name='spam',
         last_name='ham',
         email='spam@example.com',
-        created=datetime.datetime(2016, 6, 1, 0, 0),
-        modified=datetime.datetime(2016, 6, 1, 0, 0)>
+        created='2016-06-01T00:00:00',
+        modified='2016-06-01T00:00:00'>

@@ -41,6 +41,8 @@ class Repr(_Repr):
 
     def _repr_attr(self, obj, level):
         attr_name, attr_value = obj
+        if hasattr(attr_value, 'isoformat'):
+            return '%s=%r' % (attr_name, attr_value.isoformat())
         return '%s=%r' % (attr_name, attr_value)
 
     def _iter_attrs(self, obj):
