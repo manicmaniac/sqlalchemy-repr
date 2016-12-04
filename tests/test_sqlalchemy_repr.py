@@ -33,16 +33,22 @@ class TestRepr(unittest.TestCase):
         engine = create_engine('sqlite://')
         Base.metadata.create_all(engine)
         Session = sessionmaker(bind=engine)
+
+        self._date = datetime.now()
+        self._date_str = self._date.isoformat()
+
         self.session = Session()
-        self.user = User(name='spam', created=datetime.now())
         self.entry = Entry(title='ham', text=self.dummy_text, user_id=1)
+        self.user = User(name='spam', created=self._date)
         self.session.add(self.user)
         self.session.add(self.entry)
         self.session.commit()
 
     def test_repr_with_user(self):
         result = Repr().repr(self.user)
-        pattern = r"<User id=1, name=u?'spam', created=datetime\.datetime\(.*\)"
+        pattern = r"<User id=1, name=u?'spam', created='{0}'".format(
+            self._date_str
+        )
         self.assertMatch(result, pattern)
 
     def test_repr_with_entry(self):
@@ -56,7 +62,9 @@ class TestRepr(unittest.TestCase):
 
     def test_pretty_repr_with_user(self):
         result = PrettyRepr().repr(self.user)
-        pattern = r"<User\n    id=1,\n    name=u?'spam',\n    created=datetime\.datetime\(.*\)>"
+        pattern = r"<User\n    id=1,\n    name=u?'spam',\n    created='{0}'>".format(
+            self._date_str
+        )
         self.assertMatch(result, pattern)
 
     def test_pretty_repr_with_entry(self):
