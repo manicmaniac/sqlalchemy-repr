@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='sqlalchemy-repr',
-    version='0.0.1',
+    version='0.0.2',
     description='Automatically generates pretty repr of a SQLAlchemy model.',
     long_description=open('README.rst').read(),
     keywords='pprint pretty print repr sqlalchemy extension',
