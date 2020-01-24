@@ -3,10 +3,11 @@ python:
     - 2.7
 env:
     matrix:
-        - TOXENV=py26
         - TOXENV=py27
-        - TOXENV=py33
-        - TOXENV=py34
+        - TOXENV=py35
+        - TOXENV=py36
+        - TOXENV=py37
+        - TOXENV=py38
         - TOXENV=flake8
         - TOXENV=isort
 install:
