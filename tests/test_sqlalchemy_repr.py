@@ -28,6 +28,16 @@ class Entry(Base):
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
 
 
+class EntryWithBlacklistAndWhitelist(Base):
+    __tablename__ = 'entries_with_blacklist'
+    id = Column(Integer, primary_key=True)
+    title = Column(Unicode(255), nullable=False)
+    text = Column(UnicodeText, nullable=False, default='')
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    __repr_blacklist__ = ('text',)
+    __repr_whitelist__ = ('text', 'title')
+
+
 class TestRepr(unittest.TestCase):
     def setUp(self):
         engine = create_engine('sqlite://')
@@ -39,9 +49,11 @@ class TestRepr(unittest.TestCase):
 
         self.session = Session()
         self.entry = Entry(title='ham', text=self.dummy_text, user_id=1)
+        self.blacklist_entry = EntryWithBlacklistAndWhitelist(title='ham', text=self.dummy_text, user_id=1)
         self.user = User(name='spam', created=self._date)
         self.session.add(self.user)
         self.session.add(self.entry)
+        self.session.add(self.blacklist_entry)
         self.session.commit()
 
     def test_repr_with_user(self):
@@ -70,6 +82,11 @@ class TestRepr(unittest.TestCase):
     def test_pretty_repr_with_entry(self):
         result = PrettyRepr().repr(self.entry)
         pattern = r"<Entry\n    id=1,\n    title=u?'ham',\n    text=u?'Lorem.*',\n    user_id=1>"
+        self.assertMatch(result, pattern)
+
+    def test_pretty_repr_with_blacklist_and_whitelist(self):
+        result = PrettyRepr().repr(self.blacklist_entry)
+        pattern = r"<EntryWithBlacklistAndWhitelist\n    title='ham'>"
         self.assertMatch(result, pattern)
 
     def assertMatch(self, string, pattern):
