@@ -29,6 +29,6 @@ jobs:
     - run: twine upload --verbose artifact/*
       env:
         TWINE_NON_INTERACTIVE: 1
-        TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
+        TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
