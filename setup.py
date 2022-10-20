@@ -10,7 +10,7 @@ setup(
     author_email='rito.0305@gmail.com',
     url='https://github.com/manicmaniac/sqlalchemy-repr',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
