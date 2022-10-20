@@ -11,7 +11,6 @@ try:
 except ImportError:
     from repr import Repr as _Repr
 
-
 __all__ = ['Repr', 'PrettyRepr', 'RepresentableBase',
            'PrettyRepresentableBase']
 
@@ -46,8 +45,17 @@ class Repr(_Repr):
         return '%s=%r' % (attr_name, attr_value)
 
     def _iter_attrs(self, obj):
+        blacklist = set(getattr(obj, '__repr_blacklist__', set()))
+        whitelist = set(getattr(obj, '__repr_whitelist__', set()))
+
         attr_names = inspect(obj.__class__).columns.keys()
         for attr_name in attr_names:
+            if attr_name in blacklist:
+                continue
+
+            if whitelist and attr_name not in whitelist:
+                continue
+
             yield (attr_name, getattr(obj, attr_name))
 
 
