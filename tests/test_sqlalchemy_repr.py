@@ -86,7 +86,7 @@ class TestRepr(unittest.TestCase):
 
     def test_pretty_repr_with_blacklist_and_whitelist(self):
         result = PrettyRepr().repr(self.blacklist_entry)
-        pattern = r"<EntryWithBlacklistAndWhitelist\n    title='ham'>"
+        pattern = r"<EntryWithBlacklistAndWhitelist\n    title=u?'ham'>"
         self.assertMatch(result, pattern)
 
     def assertMatch(self, string, pattern):
