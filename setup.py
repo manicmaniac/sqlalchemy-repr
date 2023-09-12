@@ -8,6 +8,7 @@ setup(
     keywords='pprint pretty print repr sqlalchemy extension',
     author='Ryosuke Ito',
     author_email='rito.0305@gmail.com',
+    license="MIT",
     url='https://github.com/manicmaniac/sqlalchemy-repr',
     classifiers=[
         'Development Status :: 4 - Beta',
